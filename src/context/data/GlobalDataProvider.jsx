@@ -10,6 +10,7 @@ export const GlobalDataProvider = ({ children }) => {
     const [marcas, setMarcas] = useState([]);
     const [productos, setProductos] = useState([]);
 
+
     const fetchCategorias = async () => {
         const data = await getCategories();
         setCategorias(data);
@@ -24,6 +25,7 @@ export const GlobalDataProvider = ({ children }) => {
         const data = await getProduct();
         setProductos(data);
     };
+
 
 
 

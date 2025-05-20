@@ -12,7 +12,7 @@ const Header = ({ showDrawer }) => {
 
     const roleView = ["super_admin", "admin"]
     return (
-        <div className='border-b w-full flex justify-between items-center px-4 py-6'>
+        <header className='border-b w-full flex justify-between items-center px-4 py-6'>
             <div>
                 <h1>logo</h1>
             </div>
@@ -30,9 +30,9 @@ const Header = ({ showDrawer }) => {
                 </ul>
             </div>
             <div>
-                {/* <Button onClick={showDrawer}>
+                <Button onClick={showDrawer}>
                     carrito
-                </Button> */}
+                </Button>
                 {/* <Avatar icon={<UserOutlined />} /> */}
                 {user ?
                     <Button onClick={logout}>
@@ -45,7 +45,7 @@ const Header = ({ showDrawer }) => {
                 }
             </div>
             <Login open={modalOpen} onClose={() => setModalOpen(false)} />
-        </div >
+        </header >
     )
 }
 

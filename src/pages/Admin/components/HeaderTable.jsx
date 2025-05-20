@@ -10,7 +10,7 @@ const HeaderTable = ({ name, url }) => {
 
     return (
         <div className='flex justify-between items-center py-2'>
-            <h1 className='font-bold text-xl py-1 '>{name}</h1>
+            <h1 className='font-semibold text-3xl py-1 '>{name}</h1>
             <button
                 onClick={createProduct}
                 className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer"

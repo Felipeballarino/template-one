@@ -3,14 +3,41 @@ import { DeleteOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useGlobalCart } from '../context/cart/useGlobalCart'
 import foto1 from "../assets/remera.webp"
-import { generarMensajeWhatsApp } from '../utils/utils'
+import { formatearPrecio, generarMensajeWhatsApp } from '../utils/utils'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 
 const Cart = ({ open, onClose }) => {
+    const navigate = useNavigate()
     const { cart, cartTotal, updateQuantity, removeFromCart, clearCart } = useGlobalCart()
 
+    const sendWppSubmit = async () => {
+        const mensaje = generarMensajeWhatsApp(cart, cartTotal);
+        const telefono = "5493534196213";
+        const url = `https://wa.me/${telefono}?text=${mensaje}`;
+        window.open(url, '_blank');
+        const result = await Swal.fire({
+            title: '¿Pudiste comunicarte con el vendedor por WhatsApp?',
+            text: 'Esto nos ayuda a confirmar tu pedido.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, me comuniqué',
+            cancelButtonText: 'No aún',
+        });
 
+        if (result.isConfirmed) {
+            clearCart();
+            onClose();
+            await Swal.fire({
+                title: '¡Gracias por tu compra!',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false,
+            });
+        }
+    }
+    console.log(cart)
     return (
         <Drawer title="Tu Carrito" open={open} onClose={onClose} width={400}>
             <div className='flex flex-col h-full justify-between'>
@@ -25,7 +52,7 @@ const Cart = ({ open, onClose }) => {
                                 />
                                 <div className='flex-1'>
                                     <h3 className='font-medium'>{item.nombre}</h3>
-                                    <p className='text-sm text-gray-500'>${item.precio} c/u</p>
+                                    <p className='text-sm text-gray-500'>{formatearPrecio(item.precio)} c/u</p>
                                     <p className='text-sm text-gray-500'>Color: {item.nombreColor}</p>
                                     <p className='text-sm text-gray-500'>Talle: {item.talle}</p>
                                     <div className='flex items-center gap-2 mt-1'>
@@ -57,39 +84,23 @@ const Cart = ({ open, onClose }) => {
                 <div className='pt-4 border-t mt-4'>
                     <div className='flex justify-between font-semibold text-lg mb-4'>
                         <span>Total:</span>
-                        <span>${cartTotal}</span>
+                        <span>{formatearPrecio(cartTotal)}</span>
                     </div>
-                    <Button
+                    {/* <Button
                         type='primary'
                         block
                         size='large'
                         disabled={cart.length === 0}
-                        onClick={async () => {
-                            const mensaje = generarMensajeWhatsApp(cart, cartTotal);
-                            const telefono = "5493534196213";
-                            const url = `https://wa.me/${telefono}?text=${mensaje}`;
-                            window.open(url, '_blank');
-                            const result = await Swal.fire({
-                                title: '¿Pudiste comunicarte con el vendedor por WhatsApp?',
-                                text: 'Esto nos ayuda a confirmar tu pedido.',
-                                icon: 'question',
-                                showCancelButton: true,
-                                confirmButtonText: 'Sí, me comuniqué',
-                                cancelButtonText: 'No aún',
-                            });
-
-                            if (result.isConfirmed) {
-                                clearCart();
-                                onClose();
-                                await Swal.fire({
-                                    title: '¡Gracias por tu compra!',
-                                    icon: 'success',
-                                    timer: 2000,
-                                    showConfirmButton: false,
-                                });
-                            }
-                        }}
+                        onClick={sendWppSubmit}
                     >
+                        Finalizar Compra
+                    </Button> */}
+
+                    <Button type='primary'
+                        block
+                        size='large'
+                        disabled={cart.length === 0}
+                        onClick={() => navigate("/checkout")}>
                         Finalizar Compra
                     </Button>
                 </div>

@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import FiltrosCatalogos from '../components/FiltrosCatalogos';
 import ProductCard from '../components/ProductCard';
 import { useGlobalData } from '../context/data/useGlobalData';
-import ProductCardWpp from '../components/ProductCardWpp';
+// import ProductCardWpp from '../components/ProductCardWpp';
 
 
 const Productos = () => {
@@ -15,6 +15,9 @@ const Productos = () => {
 
     const [marcaSeleccionada, setMarcaSeleccionada] = useState([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState([]);
+
+    const [busqueda, setBusqueda] = useState("");
+
 
     // Leer de la URL al cargar
     useEffect(() => {
@@ -37,10 +40,22 @@ const Productos = () => {
     }, [marcaSeleccionada, categoriaSeleccionada, setSearchParams]);
 
     const productosFiltrados = productos.filter(product => {
-        const coincideMarca = marcaSeleccionada.length > 0 ? marcaSeleccionada.includes(product.marcaNombre) : true
-        const coincideCategoria = categoriaSeleccionada.length > 0 ? categoriaSeleccionada.includes(product.categoriaNombre) : true
-        return coincideMarca && coincideCategoria
-    })
+        const coincideMarca = marcaSeleccionada.length > 0 ? marcaSeleccionada.includes(product.marcaNombre) : true;
+        const coincideCategoria = categoriaSeleccionada.length > 0 ? categoriaSeleccionada.includes(product.categoriaNombre) : true;
+        const coincideBusqueda = busqueda
+            ? [
+                product.nombre,
+                product.descripcion,
+                product.marcaNombre,
+                product.categoriaNombre
+            ]
+                .some(campo =>
+                    campo?.toLowerCase().includes(busqueda.toLowerCase())
+                )
+            : true;
+
+        return coincideMarca && coincideCategoria && coincideBusqueda;
+    });
 
     return (
         <Layout>
@@ -52,14 +67,13 @@ const Productos = () => {
                     setMarcaSeleccionada={setMarcaSeleccionada}
                     categoriaSeleccionada={categoriaSeleccionada}
                     setCategoriaSeleccionada={setCategoriaSeleccionada}
+                    onSearch={setBusqueda}
                 />
                 <div className='col-span-6 grid grid-cols-3 gap-4 '>
-                    {/* {productosFiltrados.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))} */}
                     {productosFiltrados.map((product) => (
-                        <ProductCardWpp key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} />
                     ))}
+
                 </div>
 
             </div>

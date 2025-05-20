@@ -9,11 +9,6 @@ export const productColumns = (navigate, deleteProd) => [
         key: 'nombre',
     },
     {
-        title: 'Descripcion',
-        dataIndex: 'descripcion',
-        key: 'descripcion',
-    },
-    {
         title: 'Precio',
         key: 'precio',
         render: (_, record) => (
@@ -21,9 +16,11 @@ export const productColumns = (navigate, deleteProd) => [
         ),
     },
     {
-        title: 'Stock',
-        dataIndex: 'stock',
-        key: 'stock',
+        title: 'Descuento (%)',
+        key: 'porcentajeDescuento',
+        render: (_, record) => (
+            <p>{record.porcentajeDescuento > 0 ? `${record.porcentajeDescuento} %` : `-`}</p>
+        ),
     },
     {
         title: 'Acciones',

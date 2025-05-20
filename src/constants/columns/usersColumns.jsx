@@ -10,6 +10,11 @@ export const userColumns = [
         key: 'username',
     },
     {
+        title: 'Contraseña',
+        dataIndex: 'password',
+        key: 'password',
+    },
+    {
         title: 'Rol',
         dataIndex: 'role',
         key: 'role',
@@ -18,14 +23,6 @@ export const userColumns = [
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
-    },
-    {
-        title: 'Dirección',
-        key: 'address',
-        render: (_, record) => {
-            const { street, suite, city, zipcode } = record.address || {};
-            return `${street}, ${suite}, ${city} (${zipcode})`;
-        },
     },
     {
         title: 'Teléfono',

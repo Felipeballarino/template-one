@@ -1,4 +1,6 @@
 import { Checkbox } from "antd"
+import { Input } from 'antd';
+const { Search } = Input;
 
 const FiltrosCatalogos = ({
     marcas,
@@ -6,7 +8,8 @@ const FiltrosCatalogos = ({
     marcaSeleccionada,
     setMarcaSeleccionada,
     categoriaSeleccionada,
-    setCategoriaSeleccionada
+    setCategoriaSeleccionada,
+    onSearch
 }) => {
 
     const handleCategoriaChange = (checked, nombreCategoria) => {
@@ -26,6 +29,13 @@ const FiltrosCatalogos = ({
     }
     return (
         <div className="flex flex-col gap-4 mb-6 col-span-2">
+            <div>
+                <Search
+                    placeholder="Buscar productos"
+                    onSearch={onSearch}
+                    className="w-full custom-search"
+                    size="large" />
+            </div>
             <div className="border px-3 py-2 rounded">
                 <h1 className="font-bold text-xl mb-2">Categorías</h1>
                 <ul className="flex flex-col gap-1">

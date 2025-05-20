@@ -36,7 +36,7 @@ const ListarProductos = () => {
 
     const columns = productColumns(navigate, deleteProd); // pasamos navigate
     return (
-        <div>
+        <div className='bg-white p-6 rounded shadow'>
             <HeaderTable name={"Productos"} url={"/admin/cargar-producto"} />
             <Tables data={productos} columns={columns} />
         </div>

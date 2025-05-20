@@ -13,7 +13,9 @@ import ListarVentas from "./pages/Admin/ventas/ListarVentas";
 import CargarCategorias from "./pages/Admin/categorias/CargarCategorias";
 import CargarMarcas from "./pages/Admin/marcas/CargarMarcas";
 import PrivateRoute from "./components/PrivateRoutes";
-
+import ConfigPages from "./pages/Admin/configuracion/ConfigPages";
+import CheckoutPage from "./pages/CheckoutPage";
+import 'quill/dist/quill.snow.css'
 function App() {
 
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={
           <PrivateRoute allowedRoles={["super_admin", "admin"]}>
             <AdminLayout />
@@ -39,6 +42,7 @@ function App() {
           <Route path="/admin/editar-marca/:id" element={<CargarMarcas />} />
           <Route path="/admin/listar-ventas" element={<ListarVentas />} />
           <Route path="/admin/listar-usuarios" element={<ListarUsuarios />} />
+          <Route path="/admin/settings" element={<ConfigPages />} />
         </Route>
       </Routes>
     </Router>

@@ -1,11 +1,13 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import { Outlet, NavLink } from "react-router-dom";
+import { useAuth } from '../../context/auth/useAuth';
 
 
 const AdminLayout = () => {
 
-
+    const { user } = useAuth()
+    const roleView = ["super_admin", "admin"]
     return (
         <Layout>
             <div className="flex min-h-screen bg-gray-100">
@@ -16,8 +18,9 @@ const AdminLayout = () => {
                         <NavLink to="/admin/listar-productos" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>📦 Productos</NavLink>
                         <NavLink to="/admin/listar-categorias" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>🗃️ Categorias</NavLink>
                         <NavLink to="/admin/listar-marcas" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>🔖 Marcas</NavLink>
-                        <NavLink to="/admin/listar-ventas" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>📈 Ventas</NavLink>
-                        <NavLink to="/admin/listar-usuarios" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>👥 Usuarios</NavLink>
+                        {/* <NavLink to="/admin/listar-ventas" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>📈 Ventas</NavLink> */}
+                        {roleView.includes(user?.role) && <NavLink to="/admin/listar-usuarios" className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>👥 Usuarios</NavLink>}
+                        <NavLink to={"/admin/settings"} className={({ isActive }) => isActive ? 'text-blue-600 font-bold' : ''}>⚙️ Configuracion</NavLink>
                     </nav>
                 </aside>
 
@@ -27,7 +30,7 @@ const AdminLayout = () => {
                         <h1 className="text-2xl font-bold">Panel de Administración</h1>
                     </div>
 
-                    <div className="bg-white p-6 rounded shadow">
+                    <div >
                         <Outlet />
                     </div>
                 </main>
