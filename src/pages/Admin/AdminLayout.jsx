@@ -1,12 +1,10 @@
-import React from 'react'
-import Layout from '../../components/Layout'
+import Layout from '../../shared/layout/Layout'
 import { Outlet, NavLink } from "react-router-dom";
-import { useAuth } from '../../context/auth/useAuth';
-
+import { useAuthStore } from '../../store/authStore';
 
 const AdminLayout = () => {
 
-    const { user } = useAuth()
+    const { user } = useAuthStore()
     const roleView = ["super_admin", "admin"]
     return (
         <Layout>
@@ -29,7 +27,6 @@ const AdminLayout = () => {
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold">Panel de Administración</h1>
                     </div>
-
                     <div >
                         <Outlet />
                     </div>

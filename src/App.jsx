@@ -1,28 +1,43 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Productos from "./pages/Productos";
-import ProductoDetalle from "./pages/ProductoDetalle";
-import AdminLayout from "./pages/Admin/AdminLayout";
-import Dashboard from "./pages/Admin/Dashboard";
-import CargaProductos from "./pages/Admin/productos/CargaProductos";
-import ListarProductos from "./pages/Admin/productos/ListarProductos";
-import ListarUsuarios from "./pages/Admin/usuarios/ListarUsuarios";
-import ListarCategorias from "./pages/Admin/categorias/ListarCategorias";
-import ListarMarcas from "./pages/Admin/marcas/ListarMarcas";
-import ListarVentas from "./pages/Admin/ventas/ListarVentas";
-import CargarCategorias from "./pages/Admin/categorias/CargarCategorias";
-import CargarMarcas from "./pages/Admin/marcas/CargarMarcas";
-import PrivateRoute from "./components/PrivateRoutes";
-import ConfigPages from "./pages/Admin/configuracion/ConfigPages";
-import CheckoutPage from "./pages/CheckoutPage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/home/Home";
+import ProductosList from "./pages/products/ProductosList"
+import ProductoDetalle from "./pages/products/ProductoDetalle";
+import AdminLayout from "./pages/admin/AdminLayout";
+import CargaProductos from "./features/products/admin/cargarProductos/index";
+import ListarProductos from "./features/products/admin/ListarProductos";
+import ListarUsuarios from "./features/users/admin/ListarUsuarios";
+import ListarCategorias from "./features/categories/admin/ListarCategorias";
+import CargarCategorias from "./features/categories/admin/CargarCategorias";
+import ListarMarcas from "./features/brands/admin/ListarMarcas";
+import CargarMarcas from "./features/brands/admin/CargarMarcas";
+import ListarVentas from "./features/sales/admin/ListarVentas";
+import PrivateRoute from "./features/auth/components/PrivateRoutes";
+import ConfigPages from "./features/settings/admin/ConfigPages";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
+
 import 'quill/dist/quill.snow.css'
+import { useEffect } from "react";
+import { useBrandsStore } from "./store/brandsStore";
+import { useCategoriesStore } from "./store/categoriesStore";
+import { useProductsStore } from "./store/productsStore";
+
 function App() {
+
+  const { loadBrands } = useBrandsStore()
+  const { loadCategories } = useCategoriesStore()
+  const { loadProducts } = useProductsStore()
+
+  useEffect(() => {
+    loadBrands();
+    loadCategories()
+    loadProducts()
+  }, []);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/productos" element={<Productos />} />
+        <Route path="/productos" element={<ProductosList />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={
@@ -30,19 +45,19 @@ function App() {
             <AdminLayout />
           </PrivateRoute>
         }>
-          <Route index element={<Dashboard />} />
-          <Route path="/admin/listar-productos" element={<ListarProductos />} />
-          <Route path="/admin/cargar-producto" element={<CargaProductos />} />
-          <Route path="/admin/editar-producto/:id" element={<CargaProductos />} />
-          <Route path="/admin/listar-categorias" element={<ListarCategorias />} />
-          <Route path="/admin/cargar-categoria" element={<CargarCategorias />} />
-          <Route path="/admin/editar-categoria/:id" element={<CargarCategorias />} />
-          <Route path="/admin/listar-marcas" element={<ListarMarcas />} />
-          <Route path="/admin/cargar-marcas" element={<CargarMarcas />} />
-          <Route path="/admin/editar-marca/:id" element={<CargarMarcas />} />
-          <Route path="/admin/listar-ventas" element={<ListarVentas />} />
-          <Route path="/admin/listar-usuarios" element={<ListarUsuarios />} />
-          <Route path="/admin/settings" element={<ConfigPages />} />
+          <Route index element={<Navigate to="/admin/listar-productos" replace />} />
+          <Route path="listar-productos" element={<ListarProductos />} />
+          <Route path="cargar-producto" element={<CargaProductos />} />
+          <Route path="editar-producto/:id" element={<CargaProductos />} />
+          <Route path="listar-categorias" element={<ListarCategorias />} />
+          <Route path="cargar-categoria" element={<CargarCategorias />} />
+          <Route path="editar-categoria/:id" element={<CargarCategorias />} />
+          <Route path="listar-marcas" element={<ListarMarcas />} />
+          <Route path="cargar-marcas" element={<CargarMarcas />} />
+          <Route path="editar-marca/:id" element={<CargarMarcas />} />
+          <Route path="listar-ventas" element={<ListarVentas />} />
+          <Route path="listar-usuarios" element={<ListarUsuarios />} />
+          <Route path="settings" element={<ConfigPages />} />
         </Route>
       </Routes>
     </Router>
