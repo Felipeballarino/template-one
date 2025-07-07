@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Home from "./pages/home/Home";
 import ProductosList from "./pages/products/ProductosList"
 import ProductoDetalle from "./pages/products/ProductoDetalle";
-import AdminLayout from "./pages/admin/AdminLayout";
+import AdminLayout from "./pages/admin/AdminLayout.jsx";
 import CargaProductos from "./features/products/admin/cargarProductos/index";
 import ListarProductos from "./features/products/admin/ListarProductos";
 import ListarUsuarios from "./features/users/admin/ListarUsuarios";
