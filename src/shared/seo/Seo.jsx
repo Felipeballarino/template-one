@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
 const Seo = ({ title, description }) => {
+
     return (
         <Helmet>
             <title>{title} | Template</title>
