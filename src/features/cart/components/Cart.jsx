@@ -52,6 +52,7 @@ const Cart = ({ open, onClose }) => {
                                     src={foto1}
                                     alt={item.nombre}
                                     className='w-16 h-16 object-cover rounded'
+                                    loading="lazy"
                                 />
                                 <div className='flex-1'>
                                     <h3 className='font-medium'>{item.nombre}</h3>

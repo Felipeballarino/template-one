@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://template-one-yirv.vercel.app/sitemap.xml

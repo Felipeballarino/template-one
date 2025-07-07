@@ -21,7 +21,7 @@ const SwiperImagenes = ({ imagenes }) => {
             >
                 {imagenes.map((img, i) => (
                     <SwiperSlide key={i}>
-                        <img src={img} alt={`Imagen ${i + 1}`} className="w-full object-contain rounded-xl" />
+                        <img src={img} alt={`Imagen ${i + 1}`} loading="lazy" className="w-full object-contain rounded-xl" />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -37,7 +37,7 @@ const SwiperImagenes = ({ imagenes }) => {
             >
                 {imagenes.map((img, i) => (
                     <SwiperSlide key={i}>
-                        <img src={img} alt={`Miniatura ${i + 1}`} className="h-30 w-full object-cover rounded-md " />
+                        <img src={img} alt={`Miniatura ${i + 1}`} loading="lazy" className="h-30 w-full object-cover rounded-md " />
                     </SwiperSlide>
                 ))}
             </Swiper>

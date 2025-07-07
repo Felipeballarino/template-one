@@ -5,6 +5,7 @@ import Layout from '../../shared/layout/Layout';
 import FiltrosCatalogos from '../../features/products/components/organisms/FiltrosCatalogos';
 import ProductCard from '../../features/products/components/organisms/ProductCard';
 import { useProductsStore } from '../../store/productsStore';
+import Seo from '../../shared/seo/Seo';
 // import ProductCardWpp from '../components/ProductCardWpp';
 
 
@@ -59,24 +60,27 @@ const Productos = () => {
     });
 
     return (
-        <Layout>
-            <div className="p-6 grid grid-cols-8 gap-4">
-                <FiltrosCatalogos
-                    marcaSeleccionada={marcaSeleccionada}
-                    setMarcaSeleccionada={setMarcaSeleccionada}
-                    categoriaSeleccionada={categoriaSeleccionada}
-                    setCategoriaSeleccionada={setCategoriaSeleccionada}
-                    onSearch={setBusqueda}
-                />
-                <div className='col-span-6 grid grid-cols-3 gap-4 '>
-                    {productosFiltrados.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
+        <>
+            <Seo title="Catalogo" description="Catalogo web" />
+            <Layout>
+                <div className="p-6 grid grid-cols-8 gap-4">
+                    <FiltrosCatalogos
+                        marcaSeleccionada={marcaSeleccionada}
+                        setMarcaSeleccionada={setMarcaSeleccionada}
+                        categoriaSeleccionada={categoriaSeleccionada}
+                        setCategoriaSeleccionada={setCategoriaSeleccionada}
+                        onSearch={setBusqueda}
+                    />
+                    <div className='col-span-6 grid grid-cols-3 gap-4 '>
+                        {productosFiltrados.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+
+                    </div>
 
                 </div>
-
-            </div>
-        </Layout>
+            </Layout>
+        </>
     )
 }
 export default Productos

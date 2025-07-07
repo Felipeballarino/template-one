@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
                     {product.porcentajeDescuento}% OFF
                 </div>
             }
-            <img src={foto1} alt={product.nombre} className='w-full h-48 object-cover' />
+            <img src={foto1} alt={product.nombre} loading="lazy" className='w-full h-48 object-cover' />
             {product.tipoVariante === 1 &&
                 (
                     product.stockGeneral !== 0 ?

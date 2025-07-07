@@ -14,7 +14,7 @@ const ProductCardWpp = ({ product }) => {
                     {product.descuento}% OFF
                 </div>
             }
-            <img src={foto1} alt={product.nombre} className='w-full h-48 object-cover' />
+            <img src={foto1} loading="lazy" alt={product.nombre} className='w-full h-48 object-cover' />
             <div className='py-1'>
                 {
                     product.variantes?.map(variant => {

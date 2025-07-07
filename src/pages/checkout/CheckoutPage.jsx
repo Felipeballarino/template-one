@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Layout from '../../shared/layout/Layout'
 import { Steps, Button, Input, Radio, Form, Typography, Divider } from 'antd'
 import { useCartStore } from '../../store/cartStore'
+import Seo from '../../shared/seo/Seo'
 
 const { Step } = Steps
 const { Title } = Typography
@@ -123,16 +124,19 @@ const CheckoutPage = () => {
     ]
 
     return (
-        <Layout>
-            <div className="max-w-3xl mx-auto p-6">
-                <Steps current={current} className="mb-6">
-                    {steps.map((item) => (
-                        <Step key={item.title} title={item.title} />
-                    ))}
-                </Steps>
-                <div>{steps[current].content}</div>
-            </div>
-        </Layout>
+        <>
+            <Seo title={"Checkout"} description="Checkout en web" />
+            <Layout>
+                <div className="max-w-3xl mx-auto p-6">
+                    <Steps current={current} className="mb-6">
+                        {steps.map((item) => (
+                            <Step key={item.title} title={item.title} />
+                        ))}
+                    </Steps>
+                    <div>{steps[current].content}</div>
+                </div>
+            </Layout>
+        </>
     )
 }
 
