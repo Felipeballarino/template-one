@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Tables from '../../../shared/tables/Tables';
+import { useEffect, useState } from 'react'
 import { getUsers } from '../services/usersSerivices';
-import { userColumns } from '../contexts/usersColumns';
-import HeaderTable from '../../../shared/tables/HeaderTable';
+import { userColumns } from '../constants/usersColumns';
 import TableComponent from '../../../shared/tables';
 
 
